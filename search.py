@@ -86,7 +86,23 @@ def depthFirstSearch(problem):
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
-    "*** YOUR CODE HERE ***"
+    depthStack = util.Stack()                   # open := [Start];
+    visited = set()                             # closed := [];
+    startingNode = (problem.getStartState(), 0, [])
+    depthStack.push(startingNode) #push first node to stack
+
+    while not depthStack.isEmpty():             #while open =/= [] do
+        (node, cost, path) = depthStack.pop()   #remove leftmost state from open, call it X;
+        if problem.isGoalState(node):           #if goal is success return
+            return path
+        if not node in visited:                 #Generate children of X
+            visited.add(node)                   #Put X on closed
+            for nextNode, nextAction, nextCost in problem.getSuccessors(node):     #Discard children if already on open or closed
+                totalCost = cost + nextCost
+                totalPath = path + [nextAction]
+                totalState = (nextNode, totalCost, totalPath)
+                depthStack.push(totalState)     #Put remaining children on left end of open
+
     util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
