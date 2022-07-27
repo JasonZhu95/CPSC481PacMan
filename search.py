@@ -89,25 +89,42 @@ def depthFirstSearch(problem):
     depthStack = util.Stack()                   # open := [Start];
     visited = set()                             # closed := [];
     startingNode = (problem.getStartState(), 0, [])
-    depthStack.push(startingNode) #push first node to stack
+    depthStack.push(startingNode) # push first node to stack
 
-    while not depthStack.isEmpty():             #while open =/= [] do
-        (node, cost, path) = depthStack.pop()   #remove leftmost state from open, call it X;
-        if problem.isGoalState(node):           #if goal is success return
+    while not depthStack.isEmpty():             # while open =/= [] do
+        (node, cost, path) = depthStack.pop()   # remove leftmost state from open, call it X;
+        if problem.isGoalState(node):           # if goal is success return
             return path
-        if not node in visited:                 #Generate children of X
-            visited.add(node)                   #Put X on closed
-            for nextNode, nextAction, nextCost in problem.getSuccessors(node):     #Discard children if already on open or closed
+        if not node in visited:                 # Generate children of X
+            visited.add(node)                   # Put X on closed
+            for nextNode, nextAction, nextCost in problem.getSuccessors(node):     # Discard children if already on open or closed
                 totalCost = cost + nextCost
                 totalPath = path + [nextAction]
                 totalState = (nextNode, totalCost, totalPath)
-                depthStack.push(totalState)     #Put remaining children on left end of open
+                depthStack.push(totalState)     # Put remaining children on left end of open
 
     util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
+    breadthQueue = util.Queue()                 # open := [Start];
+    visited = set()                             # closed := [];
+    startingNode = (problem.getStartState(), 0, [])
+    breadthQueue.push(startingNode)
+
+    while not breadthQueue.isEmpty():           # while open =/= [] do
+        (node, cost, path) = breadthQueue.pop() # remove leftmost state from open call it x
+        if problem.isGoalState(node):           # if x is a goal return SUCCESS
+            return path
+        if not node in visited:                 # generate children of x;
+            visited.add(node)                   # put X on closed;
+            for nextNode, nextAction, nextCost in problem.getSuccessors(node):
+                totalCost = cost + nextCost
+                totalPath = path + [nextAction]
+                totalState = (nextNode, totalCost, totalPath)
+                breadthQueue.push(totalState)   # put remaining children on right end of open
+
     util.raiseNotDefined()
 
 def uniformCostSearch(problem):
