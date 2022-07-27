@@ -89,8 +89,7 @@ def depthFirstSearch(problem):
     depthStack = util.Stack()                   # open := [Start];
     visited = set()                             # closed := [];
     startingNode = (problem.getStartState(), 0, [])
-    depthStack.push(startingNode) # push first node to stack
-
+    depthStack.push(startingNode)
     while not depthStack.isEmpty():             # while open =/= [] do
         (node, cost, path) = depthStack.pop()   # remove leftmost state from open, call it X;
         if problem.isGoalState(node):           # if goal is success return
@@ -112,7 +111,6 @@ def breadthFirstSearch(problem):
     visited = set()                             # closed := [];
     startingNode = (problem.getStartState(), 0, [])
     breadthQueue.push(startingNode)
-
     while not breadthQueue.isEmpty():           # while open =/= [] do
         (node, cost, path) = breadthQueue.pop() # remove leftmost state from open call it x
         if problem.isGoalState(node):           # if x is a goal return SUCCESS
