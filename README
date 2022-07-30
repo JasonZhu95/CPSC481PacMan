@@ -5,3 +5,7 @@
 // Miles Furnish - milesf7@csu.fullerton.edu
 // Daiwei Chen - dbox1016@csu.fullerton.edu
 
+// When running the autograder, cgi.escape is deprecated for python 3.8 and beyond.
+// A quick fix can be added to autograder.py to run it successfully
+// import cgi, html
+// cgi.escape = html.escape
